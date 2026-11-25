@@ -171,7 +171,11 @@ namespace Calling_Card_Generator.Services
         /// <summary>
         /// Renders a full print sheet with cards, crop marks, and cut guides onto a DrawingContext.
         /// </summary>
-        public static void DrawSheet(DrawingContext dc, PrintSheetInfo sheet, SheetLayout layout, double targetDpi = 96.0)
+        /// <summary>
+        /// Renders a full print sheet with cards, crop marks, and cut guides onto a DrawingContext.
+        /// All drawing is in 96-DPI WPF units; callers apply ScaleTransform for higher DPI.
+        /// </summary>
+        public static void DrawSheet(DrawingContext dc, PrintSheetInfo sheet, SheetLayout layout)
         {
             double pageW = layout.PaperWidthWpf;
             double pageH = layout.PaperHeightWpf;
@@ -183,7 +187,7 @@ namespace Calling_Card_Generator.Services
             foreach (var placement in sheet.Cards)
             {
                 dc.PushTransform(new TranslateTransform(placement.Bounds.X, placement.Bounds.Y));
-                CardRenderer.DrawCardSide(dc, placement.Side, placement.Bounds.Width, placement.Bounds.Height, targetDpi);
+                CardRenderer.DrawCardSide(dc, placement.Side, placement.Bounds.Width, placement.Bounds.Height);
                 dc.Pop();
             }
 
@@ -202,7 +206,7 @@ namespace Calling_Card_Generator.Services
                 typeface,
                 8.0,
                 Brushes.Gray,
-                targetDpi / 96.0);
+                1.0);
 
             dc.DrawText(footerText, new Point(layout.MarginLeftInches * 96.0, pageH - 24));
         }
@@ -264,7 +268,7 @@ namespace Calling_Card_Generator.Services
             using (var dc = visual.RenderOpen())
             {
                 dc.PushTransform(new ScaleTransform(scale, scale));
-                DrawSheet(dc, sheet, layout, dpi);
+                DrawSheet(dc, sheet, layout);
                 dc.Pop();
             }
 
@@ -317,7 +321,7 @@ namespace Calling_Card_Generator.Services
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
-            PrintImpositionEngine.DrawSheet(drawingContext, _sheet, _layout, 96.0);
+            PrintImpositionEngine.DrawSheet(drawingContext, _sheet, _layout);
         }
     }
 }

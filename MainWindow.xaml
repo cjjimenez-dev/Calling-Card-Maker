@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:Calling_Card_Generator.Controls"
+        xmlns:models="clr-namespace:Calling_Card_Generator.Models"
         mc:Ignorable="d"
         Title="Calling Card Studio" 
         Icon="Assets/app_icon.ico"
@@ -870,11 +871,12 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <ComboBox SelectedValue="{Binding SideOption, UpdateSourceTrigger=PropertyChanged}" 
+                                                          SelectedValuePath="Tag"
                                                           Height="24" VerticalAlignment="Center"
                                                           SelectionChanged="QueueSideChanged">
-                                                    <ComboBoxItem Content="Front &amp; Back"/>
-                                                    <ComboBoxItem Content="Front Only"/>
-                                                    <ComboBoxItem Content="Back Only"/>
+                                                    <ComboBoxItem Content="Front &amp; Back" Tag="{x:Static models:PrintSideOption.FrontAndBack}"/>
+                                                    <ComboBoxItem Content="Front Only" Tag="{x:Static models:PrintSideOption.FrontOnly}"/>
+                                                    <ComboBoxItem Content="Back Only" Tag="{x:Static models:PrintSideOption.BackOnly}"/>
                                                 </ComboBox>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>

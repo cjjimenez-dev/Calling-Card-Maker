@@ -1974,6 +1974,17 @@ namespace Calling_Card_Generator
             }
 
             var printDlg = new PrintDialog();
+            try
+            {
+                printDlg.PrintTicket.PageMediaSize = _sheetLayout.PaperType == PaperType.A4
+                    ? new System.Printing.PageMediaSize(System.Printing.PageMediaSizeName.ISOA4)
+                    : new System.Printing.PageMediaSize(System.Printing.PageMediaSizeName.NorthAmericaLetter);
+                printDlg.PrintTicket.PageOrientation = _sheetLayout.PaperOrientation == CardOrientation.Landscape
+                    ? System.Printing.PageOrientation.Landscape
+                    : System.Printing.PageOrientation.Portrait;
+            }
+            catch { }
+
             if (printDlg.ShowDialog() != true) return;
 
             if (_sheetLayout.PrintMethod == PrintMethod.ManualTwoPass)

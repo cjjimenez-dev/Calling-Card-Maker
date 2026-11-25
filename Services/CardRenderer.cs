@@ -78,9 +78,10 @@ namespace Calling_Card_Generator.Services
         }
 
         /// <summary>
-        /// Draws a card side onto a DrawingContext at standard 96 DPI units.
+        /// Draws a card side onto a DrawingContext at standard 96 DPI WPF units.
+        /// Callers apply ScaleTransform for higher DPI rendering.
         /// </summary>
-        public static void DrawCardSide(DrawingContext dc, CardSide side, double widthWpf, double heightWpf, double targetDpi = 96.0)
+        public static void DrawCardSide(DrawingContext dc, CardSide side, double widthWpf, double heightWpf)
         {
             // Clip to card boundary
             var cardRect = new Rect(0, 0, widthWpf, heightWpf);
@@ -101,17 +102,16 @@ namespace Calling_Card_Generator.Services
 
             // 2. Elements ordered by ZIndex
             var sortedElements = side.Elements.OrderBy(e => e.ZIndex).ToList();
-            double pixelsPerDip = targetDpi / 96.0;
 
             foreach (var element in sortedElements)
             {
-                DrawSingleElement(dc, element, pixelsPerDip);
+                DrawSingleElement(dc, element);
             }
 
             dc.Pop(); // Pop clip
         }
 
-        private static void DrawSingleElement(DrawingContext dc, CardElement element, double pixelsPerDip)
+        private static void DrawSingleElement(DrawingContext dc, CardElement element)
         {
             bool hasTransform = element.Rotation != 0 || element.FlipHorizontal || element.FlipVertical;
             if (hasTransform)
@@ -135,7 +135,7 @@ namespace Calling_Card_Generator.Services
 
             if (element is TextElement textElem)
             {
-                DrawTextElement(dc, textElem, pixelsPerDip);
+                DrawTextElement(dc, textElem);
             }
             else if (element is ImageElement imgElem)
             {
@@ -154,7 +154,7 @@ namespace Calling_Card_Generator.Services
                 dc.PushTransform(new TranslateTransform(groupElem.X, groupElem.Y));
                 foreach (var child in groupElem.Children.OrderBy(c => c.ZIndex))
                 {
-                    DrawSingleElement(dc, child, pixelsPerDip);
+                    DrawSingleElement(dc, child);
                 }
                 dc.Pop();
             }
@@ -165,7 +165,7 @@ namespace Calling_Card_Generator.Services
             }
         }
 
-        private static void DrawTextElement(DrawingContext dc, TextElement elem, double pixelsPerDip)
+        private static void DrawTextElement(DrawingContext dc, TextElement elem)
         {
             if (string.IsNullOrEmpty(elem.Text)) return;
 
@@ -184,7 +184,7 @@ namespace Calling_Card_Generator.Services
                 typeface,
                 elem.FontSize,
                 textBrush,
-                pixelsPerDip)
+                1.0)
             {
                 MaxTextWidth = Math.Max(10, elem.Width),
                 MaxTextHeight = Math.Max(10, elem.Height),
@@ -263,7 +263,7 @@ namespace Calling_Card_Generator.Services
             using (var dc = visual.RenderOpen())
             {
                 dc.PushTransform(new ScaleTransform(scale, scale));
-                DrawCardSide(dc, side, widthWpf, heightWpf, targetDpi);
+                DrawCardSide(dc, side, widthWpf, heightWpf);
                 dc.Pop();
             }
 
