@@ -1,0 +1,65 @@
+<UserControl x:Class="Calling_Card_Generator.Controls.CardCanvasControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="400"
+             Focusable="True"
+             UseLayoutRounding="True"
+             SnapsToDevicePixels="True"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="ClearType"
+             TextOptions.TextHintingMode="Auto"
+             RenderOptions.BitmapScalingMode="HighQuality"
+             RenderOptions.ClearTypeHint="Enabled"
+             KeyDown="UserControl_KeyDown">
+    <Grid Background="#F4F4F5" ClipToBounds="True">
+        <!-- Scrollable centered viewport -->
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Focusable="False">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="32"
+                  UseLayoutRounding="True" SnapsToDevicePixels="True">
+
+                <!-- Crisp Drop Shadow Layer strictly BEHIND the card (independent sibling, prevents WPF subtree rasterization/blur) -->
+                <Border x:Name="ShadowBorder"
+                        Background="#FFFFFF"
+                        CornerRadius="2"
+                        IsHitTestVisible="False"
+                        UseLayoutRounding="True"
+                        SnapsToDevicePixels="True">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#090D1A" BlurRadius="20" ShadowDepth="3" Opacity="0.14"/>
+                    </Border.Effect>
+                </Border>
+
+                <!-- Main Card Visual Container (NO EFFECT applied here to guarantee direct ClearType subpixel rendering) -->
+                <Grid x:Name="RootCanvasGrid" UseLayoutRounding="True" SnapsToDevicePixels="True">
+                    <!-- Outer Card Border -->
+                    <Border x:Name="CardBorder"
+                            Background="White"
+                            BorderBrush="#CBD5E1"
+                            BorderThickness="1"
+                            CornerRadius="1"
+                            UseLayoutRounding="True"
+                            SnapsToDevicePixels="True">
+                        <Grid UseLayoutRounding="True" SnapsToDevicePixels="True">
+                            <!-- Main Elements Canvas -->
+                            <Canvas x:Name="ElementsCanvas"
+                                    Background="White"
+                                    ClipToBounds="True"
+                                    UseLayoutRounding="True"
+                                    SnapsToDevicePixels="True"
+                                    MouseLeftButtonDown="ElementsCanvas_MouseLeftButtonDown"/>
+
+                            <!-- Guides Overlay (Safe Area & Bleed) -->
+                            <Canvas x:Name="GuidesCanvas" IsHitTestVisible="False"/>
+
+                            <!-- Selection Overlay (handles, selection dashed outline) -->
+                            <Canvas x:Name="SelectionCanvas" IsHitTestVisible="True"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

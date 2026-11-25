@@ -1,0 +1,17 @@
+# Build & Publish artifacts
+bin/
+obj/
+Publish/
+Dist/
+TestOutput/
+*.exe
+*.zip
+*.dll
+*.pdb
+crash.log
+
+# IDE / User files
+.vs/
+*.user
+*.suo
+*.cache
