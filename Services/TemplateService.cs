@@ -52,6 +52,50 @@ namespace Calling_Card_Generator.Services
 
             template.Front.BackgroundColor = "#FFFFFF";
 
+            // Lively Top Dual-Tone Accent Bar
+            template.Front.Elements.Add(new ShapeElement
+            {
+                X = 0, Y = 0, Width = 336, Height = 4,
+                ShapeKind = ShapeType.Rectangle,
+                FillColor = "#0B1D4B", StrokeColor = "Transparent", StrokeThickness = 0, ZIndex = 0
+            });
+            template.Front.Elements.Add(new ShapeElement
+            {
+                X = 0, Y = 4, Width = 210, Height = 2,
+                ShapeKind = ShapeType.Rectangle,
+                FillColor = "#2563EB", StrokeColor = "Transparent", StrokeThickness = 0, ZIndex = 0
+            });
+            template.Front.Elements.Add(new ShapeElement
+            {
+                X = 210, Y = 4, Width = 126, Height = 2,
+                ShapeKind = ShapeType.Rectangle,
+                FillColor = "#38BDF8", StrokeColor = "Transparent", StrokeThickness = 0, ZIndex = 0
+            });
+
+            // Left Vertical Accent Bar beside Name & Title
+            template.Front.Elements.Add(new ShapeElement
+            {
+                X = 12, Y = 30, Width = 3, Height = 50, CornerRadius = 1.5,
+                ShapeKind = ShapeType.Rectangle,
+                FillColor = "#2563EB", StrokeColor = "Transparent", StrokeThickness = 0, ZIndex = 1
+            });
+
+            // Soft Contact Info Backdrop Card
+            template.Front.Elements.Add(new ShapeElement
+            {
+                X = 12, Y = 86, Width = 166, Height = 44, CornerRadius = 4,
+                ShapeKind = ShapeType.Rectangle,
+                FillColor = "#F8FAFC", StrokeColor = "#E2E8F0", StrokeThickness = 0.7, ZIndex = 1
+            });
+
+            // Bottom Accent Bar
+            template.Front.Elements.Add(new ShapeElement
+            {
+                X = 0, Y = 188, Width = 336, Height = 4,
+                ShapeKind = ShapeType.Rectangle,
+                FillColor = "#0B1D4B", StrokeColor = "Transparent", StrokeThickness = 0, ZIndex = 8
+            });
+
             // Logo Top Right
             if (!string.IsNullOrEmpty(logoBase64))
             {
@@ -63,7 +107,7 @@ namespace Calling_Card_Generator.Services
                     Height = 36,
                     ImageBase64 = logoBase64,
                     ImagePath = logoPath,
-                    ZIndex = 1
+                    ZIndex = 2
                 });
             }
 
@@ -85,7 +129,7 @@ namespace Calling_Card_Generator.Services
             // Person Name (Left Side)
             template.Front.Elements.Add(new TextElement
             {
-                X = 14,
+                X = 20,
                 Y = 30,
                 Width = 150,
                 Height = 22,
@@ -100,7 +144,7 @@ namespace Calling_Card_Generator.Services
 
             template.Front.Elements.Add(new TextElement
             {
-                X = 14,
+                X = 20,
                 Y = 52,
                 Width = 150,
                 Height = 15,
@@ -115,7 +159,7 @@ namespace Calling_Card_Generator.Services
 
             template.Front.Elements.Add(new TextElement
             {
-                X = 14,
+                X = 20,
                 Y = 67,
                 Width = 150,
                 Height = 14,
@@ -130,13 +174,13 @@ namespace Calling_Card_Generator.Services
             // Contact
             template.Front.Elements.Add(new TextElement
             {
-                X = 14,
-                Y = 88,
-                Width = 180,
+                X = 18,
+                Y = 91,
+                Width = 156,
                 Height = 36,
                 Text = "+632 9228173767 / +632 9157535227\nalexzwong@vcsi.biz\nalexzwong@yahoo.com",
                 FontFamily = "Arial",
-                FontSize = 7.2,
+                FontSize = 6.9,
                 TextColor = "#1F2937",
                 Alignment = TextAlignment.Left,
                 ZIndex = 6
@@ -159,63 +203,65 @@ namespace Calling_Card_Generator.Services
                 });
             }
 
-            // BACK SIDE: Landscape (White background with Vantage identity, Software Solutions, & QR)
+            // BACK SIDE: Landscape (Lively corporate design with 5 Software/POS Solutions & QR)
             template.Back.BackgroundColor = "#FFFFFF";
+
+            // Top Dual-Tone Accent Bar
+            template.Back.Elements.Add(new ShapeElement
+            {
+                X = 0, Y = 0, Width = 336, Height = 4,
+                ShapeKind = ShapeType.Rectangle,
+                FillColor = "#0B1D4B", StrokeColor = "Transparent", StrokeThickness = 0, ZIndex = 0
+            });
+            template.Back.Elements.Add(new ShapeElement
+            {
+                X = 0, Y = 4, Width = 210, Height = 2,
+                ShapeKind = ShapeType.Rectangle,
+                FillColor = "#2563EB", StrokeColor = "Transparent", StrokeThickness = 0, ZIndex = 0
+            });
+            template.Back.Elements.Add(new ShapeElement
+            {
+                X = 210, Y = 4, Width = 126, Height = 2,
+                ShapeKind = ShapeType.Rectangle,
+                FillColor = "#38BDF8", StrokeColor = "Transparent", StrokeThickness = 0, ZIndex = 0
+            });
 
             if (!string.IsNullOrEmpty(logoBase64))
             {
                 template.Back.Elements.Add(new ImageElement
                 {
-                    X = 88,
-                    Y = 20,
-                    Width = 160,
-                    Height = 40,
-                    ImageBase64 = logoBase64,
-                    ImagePath = logoPath,
-                    ZIndex = 1
+                    X = 92, Y = 12, Width = 152, Height = 38,
+                    ImageBase64 = logoBase64, ImagePath = logoPath, ZIndex = 1
                 });
             }
 
             template.Back.Elements.Add(new TextElement
             {
-                X = 30,
-                Y = 62,
-                Width = 276,
-                Height = 16,
+                X = 30, Y = 51, Width = 276, Height = 15,
                 Text = "\"an end to end solutions provider\"",
-                FontFamily = "Segoe UI",
-                FontSize = 8.5,
-                IsItalic = true,
-                TextColor = "#60A5FA",
-                Alignment = TextAlignment.Center,
-                ZIndex = 2
+                FontFamily = "Segoe UI", FontSize = 8.5, IsItalic = true,
+                TextColor = "#2563EB", Alignment = TextAlignment.Center, ZIndex = 2
             });
 
+            // Left Solutions Showcase Card
             template.Back.Elements.Add(new ShapeElement
             {
-                X = 22,
-                Y = 83,
-                Width = 292,
-                Height = 1,
-                ShapeKind = ShapeType.Line,
-                StrokeColor = "#E2E8F0",
-                StrokeThickness = 0.8,
-                ZIndex = 3
+                X = 14, Y = 71, Width = 224, Height = 107, CornerRadius = 6,
+                ShapeKind = ShapeType.Rectangle,
+                FillColor = "#FFFFFF", StrokeColor = "#CBD5E1", StrokeThickness = 0.8, ZIndex = 2
             });
-
+            template.Back.Elements.Add(new ShapeElement
+            {
+                X = 14, Y = 71, Width = 224, Height = 3, CornerRadius = 1.5,
+                ShapeKind = ShapeType.Rectangle,
+                FillColor = "#2563EB", StrokeColor = "Transparent", StrokeThickness = 0, ZIndex = 3
+            });
             template.Back.Elements.Add(new TextElement
             {
-                X = 22,
-                Y = 91,
-                Width = 210,
-                Height = 13,
-                Text = "SOFTWARE SOLUTIONS",
-                FontFamily = "Segoe UI",
-                FontSize = 6.5,
-                IsBold = true,
-                TextColor = "#64748B",
-                Alignment = TextAlignment.Left,
-                ZIndex = 4
+                X = 22, Y = 78, Width = 208, Height = 13,
+                Text = "OUR SOFTWARE & POS SOLUTIONS",
+                FontFamily = "Segoe UI", FontSize = 6.3, IsBold = true,
+                TextColor = "#0B1D4B", Alignment = TextAlignment.Left, ZIndex = 4
             });
 
             string wboxPath = Path.Combine(baseDir, "Assets", "logo_wbox.png");
@@ -224,14 +270,9 @@ namespace Calling_Card_Generator.Services
             {
                 template.Back.Elements.Add(new ImageElement
                 {
-                    X = 22,
-                    Y = 108,
-                    Width = 86,
-                    Height = 31,
-                    ImageBase64 = wboxBase64,
-                    ImagePath = wboxPath,
-                    Stretch = System.Windows.Media.Stretch.Uniform,
-                    ZIndex = 5
+                    X = 22, Y = 96, Width = 62, Height = 22,
+                    ImageBase64 = wboxBase64, ImagePath = wboxPath,
+                    Stretch = System.Windows.Media.Stretch.Uniform, ZIndex = 5
                 });
             }
 
@@ -241,14 +282,33 @@ namespace Calling_Card_Generator.Services
             {
                 template.Back.Elements.Add(new ImageElement
                 {
-                    X = 122,
-                    Y = 111,
-                    Width = 98,
-                    Height = 24,
-                    ImageBase64 = hotelKeyBase64,
-                    ImagePath = hotelKeyPath,
-                    Stretch = System.Windows.Media.Stretch.Uniform,
-                    ZIndex = 6
+                    X = 93, Y = 99, Width = 68, Height = 17,
+                    ImageBase64 = hotelKeyBase64, ImagePath = hotelKeyPath,
+                    Stretch = System.Windows.Media.Stretch.Uniform, ZIndex = 6
+                });
+            }
+
+            string posiflexPath = Path.Combine(baseDir, "Assets", "logo_posiflex.png");
+            string posiflexBase64 = File.Exists(posiflexPath) ? ImageFileToBase64(posiflexPath) : string.Empty;
+            if (!string.IsNullOrEmpty(posiflexBase64))
+            {
+                template.Back.Elements.Add(new ImageElement
+                {
+                    X = 169, Y = 101, Width = 60, Height = 12,
+                    ImageBase64 = posiflexBase64, ImagePath = posiflexPath,
+                    Stretch = System.Windows.Media.Stretch.Uniform, ZIndex = 7
+                });
+            }
+
+            string optCtrlPath = Path.Combine(baseDir, "Assets", "logo_optimum_control.png");
+            string optCtrlBase64 = File.Exists(optCtrlPath) ? ImageFileToBase64(optCtrlPath) : string.Empty;
+            if (!string.IsNullOrEmpty(optCtrlBase64))
+            {
+                template.Back.Elements.Add(new ImageElement
+                {
+                    X = 24, Y = 131, Width = 104, Height = 32,
+                    ImageBase64 = optCtrlBase64, ImagePath = optCtrlPath,
+                    Stretch = System.Windows.Media.Stretch.Uniform, ZIndex = 8
                 });
             }
 
@@ -258,43 +318,46 @@ namespace Calling_Card_Generator.Services
             {
                 template.Back.Elements.Add(new ImageElement
                 {
-                    X = 64,
-                    Y = 147,
-                    Width = 114,
-                    Height = 19,
-                    ImageBase64 = qsolveBase64,
-                    ImagePath = qsolvePath,
-                    Stretch = System.Windows.Media.Stretch.Uniform,
-                    ZIndex = 7
+                    X = 138, Y = 139, Width = 90, Height = 15,
+                    ImageBase64 = qsolveBase64, ImagePath = qsolvePath,
+                    Stretch = System.Windows.Media.Stretch.Uniform, ZIndex = 9
                 });
             }
 
-            template.Back.Elements.Add(new QrCodeElement
+            // Right QR Card
+            template.Back.Elements.Add(new ShapeElement
             {
-                X = 254,
-                Y = 98,
-                Width = 56,
-                Height = 56,
-                QrContent = "https://www.vcsi.biz",
-                DarkColor = "#0B1D4B",
-                LightColor = "#FFFFFF",
-                IncludeQuietZone = false,
-                ZIndex = 8
+                X = 246, Y = 71, Width = 76, Height = 107, CornerRadius = 6,
+                ShapeKind = ShapeType.Rectangle,
+                FillColor = "#F0F7FF", StrokeColor = "#BFDBFE", StrokeThickness = 0.8, ZIndex = 2
             });
-
             template.Back.Elements.Add(new TextElement
             {
-                X = 238,
-                Y = 157,
-                Width = 88,
-                Height = 16,
+                X = 248, Y = 77, Width = 72, Height = 11,
+                Text = "SCAN TO VISIT",
+                FontFamily = "Segoe UI", FontSize = 5.8, IsBold = true,
+                TextColor = "#2563EB", Alignment = TextAlignment.Center, ZIndex = 3
+            });
+            template.Back.Elements.Add(new QrCodeElement
+            {
+                X = 256, Y = 90, Width = 56, Height = 56,
+                QrContent = "https://www.vcsi.biz",
+                DarkColor = "#0B1D4B", LightColor = "#FFFFFF", IncludeQuietZone = false, ZIndex = 4
+            });
+            template.Back.Elements.Add(new TextElement
+            {
+                X = 246, Y = 153, Width = 76, Height = 15,
                 Text = "www.vcsi.biz",
-                FontFamily = "Segoe UI",
-                FontSize = 8,
-                IsBold = true,
-                TextColor = "#1E293B",
-                Alignment = TextAlignment.Center,
-                ZIndex = 9
+                FontFamily = "Segoe UI", FontSize = 7.8, IsBold = true,
+                TextColor = "#0B1D4B", Alignment = TextAlignment.Center, ZIndex = 5
+            });
+
+            // Bottom Accent Bar
+            template.Back.Elements.Add(new ShapeElement
+            {
+                X = 0, Y = 188, Width = 336, Height = 4,
+                ShapeKind = ShapeType.Rectangle,
+                FillColor = "#0B1D4B", StrokeColor = "Transparent", StrokeThickness = 0, ZIndex = 10
             });
 
             return template;
