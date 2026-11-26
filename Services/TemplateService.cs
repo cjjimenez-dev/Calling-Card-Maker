@@ -159,17 +159,17 @@ namespace Calling_Card_Generator.Services
                 });
             }
 
-            // BACK SIDE: Landscape
-            template.Back.BackgroundColor = "#0B1D4B";
+            // BACK SIDE: Landscape (White background with Vantage identity, Software Solutions, & QR)
+            template.Back.BackgroundColor = "#FFFFFF";
 
             if (!string.IsNullOrEmpty(logoBase64))
             {
                 template.Back.Elements.Add(new ImageElement
                 {
-                    X = 78,
-                    Y = 50,
-                    Width = 180,
-                    Height = 45,
+                    X = 88,
+                    Y = 20,
+                    Width = 160,
+                    Height = 40,
                     ImageBase64 = logoBase64,
                     ImagePath = logoPath,
                     ZIndex = 1
@@ -179,31 +179,122 @@ namespace Calling_Card_Generator.Services
             template.Back.Elements.Add(new TextElement
             {
                 X = 30,
-                Y = 105,
+                Y = 62,
                 Width = 276,
-                Height = 20,
+                Height = 16,
                 Text = "\"an end to end solutions provider\"",
                 FontFamily = "Segoe UI",
-                FontSize = 9,
+                FontSize = 8.5,
                 IsItalic = true,
-                TextColor = "#93C5FD",
+                TextColor = "#60A5FA",
                 Alignment = TextAlignment.Center,
                 ZIndex = 2
             });
 
+            template.Back.Elements.Add(new ShapeElement
+            {
+                X = 22,
+                Y = 83,
+                Width = 292,
+                Height = 1,
+                ShapeKind = ShapeType.Line,
+                StrokeColor = "#E2E8F0",
+                StrokeThickness = 0.8,
+                ZIndex = 3
+            });
+
             template.Back.Elements.Add(new TextElement
             {
-                X = 30,
-                Y = 135,
-                Width = 276,
-                Height = 20,
+                X = 22,
+                Y = 91,
+                Width = 210,
+                Height = 13,
+                Text = "SOFTWARE SOLUTIONS",
+                FontFamily = "Segoe UI",
+                FontSize = 6.5,
+                IsBold = true,
+                TextColor = "#64748B",
+                Alignment = TextAlignment.Left,
+                ZIndex = 4
+            });
+
+            string wboxPath = Path.Combine(baseDir, "Assets", "logo_wbox.png");
+            string wboxBase64 = File.Exists(wboxPath) ? ImageFileToBase64(wboxPath) : string.Empty;
+            if (!string.IsNullOrEmpty(wboxBase64))
+            {
+                template.Back.Elements.Add(new ImageElement
+                {
+                    X = 22,
+                    Y = 108,
+                    Width = 86,
+                    Height = 31,
+                    ImageBase64 = wboxBase64,
+                    ImagePath = wboxPath,
+                    Stretch = System.Windows.Media.Stretch.Uniform,
+                    ZIndex = 5
+                });
+            }
+
+            string hotelKeyPath = Path.Combine(baseDir, "Assets", "logo_hotelkey.png");
+            string hotelKeyBase64 = File.Exists(hotelKeyPath) ? ImageFileToBase64(hotelKeyPath) : string.Empty;
+            if (!string.IsNullOrEmpty(hotelKeyBase64))
+            {
+                template.Back.Elements.Add(new ImageElement
+                {
+                    X = 122,
+                    Y = 111,
+                    Width = 98,
+                    Height = 24,
+                    ImageBase64 = hotelKeyBase64,
+                    ImagePath = hotelKeyPath,
+                    Stretch = System.Windows.Media.Stretch.Uniform,
+                    ZIndex = 6
+                });
+            }
+
+            string qsolvePath = Path.Combine(baseDir, "Assets", "logo_qsolve.png");
+            string qsolveBase64 = File.Exists(qsolvePath) ? ImageFileToBase64(qsolvePath) : string.Empty;
+            if (!string.IsNullOrEmpty(qsolveBase64))
+            {
+                template.Back.Elements.Add(new ImageElement
+                {
+                    X = 64,
+                    Y = 147,
+                    Width = 114,
+                    Height = 19,
+                    ImageBase64 = qsolveBase64,
+                    ImagePath = qsolvePath,
+                    Stretch = System.Windows.Media.Stretch.Uniform,
+                    ZIndex = 7
+                });
+            }
+
+            template.Back.Elements.Add(new QrCodeElement
+            {
+                X = 254,
+                Y = 98,
+                Width = 56,
+                Height = 56,
+                QrContent = "https://www.vcsi.biz",
+                DarkColor = "#0B1D4B",
+                LightColor = "#FFFFFF",
+                IncludeQuietZone = false,
+                ZIndex = 8
+            });
+
+            template.Back.Elements.Add(new TextElement
+            {
+                X = 238,
+                Y = 157,
+                Width = 88,
+                Height = 16,
                 Text = "www.vcsi.biz",
                 FontFamily = "Segoe UI",
-                FontSize = 10,
+                FontSize = 8,
                 IsBold = true,
-                TextColor = "#FFFFFF",
+                TextColor = "#1E293B",
                 Alignment = TextAlignment.Center,
-                ZIndex = 3
+                ZIndex = 9
             });
 
             return template;
